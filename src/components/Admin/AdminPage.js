@@ -58,7 +58,10 @@ for (let i = 0; i < 10; i++) {
   d.push(...data);
 }
 
-const AdminPage = () => {
+const AdminPage = ({ faqData, setFaqData }) => {
+  const [keyword, setKeyword] = useState("");
+  const [response, setResponse] = useState("");
+  const [source, setSource] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [items, setItems] = useState([]);
   const itemsPerPage = 10;
@@ -79,6 +82,19 @@ const AdminPage = () => {
     if (pageNumber >= 1 && pageNumber <= totalPages) {
       setCurrentPage(pageNumber);
     }
+  };
+
+  const handleAddFaq = () => {
+    const newFaq = {
+      keyword,
+      response,
+      source,
+      date: new Date().toLocaleString(),
+    };
+    setFaqData([...faqData, newFaq]);
+    setKeyword("");
+    setResponse("");
+    setSource("");
   };
 
   return (
