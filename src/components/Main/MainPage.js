@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import ChatList from './ChatList';
 import ChatWindow from './ChatWindow';
 import Modal from '../modal/Modal';
-import AdminPage from '../Admin/AdminPage'; // 새로 추가된 AdminPage 컴포넌트
+import AdminPage from '../Admin/AdminPage';
+import FaqWindow from '../Faq/FaqWindow';
 import './MainPage.css';
-import profileImage from '../../images/짱구.png'; // 프로필 이미지 파일 경로
+import profileImage from '../../images/짱구.png';
 
 const MainPage = () => {
   const [chats, setChats] = useState([
@@ -13,20 +14,41 @@ const MainPage = () => {
   ]);
   const [currentChatIndex, setCurrentChatIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalType, setModalType] = useState(''); // 'signOut' or 'rename'
+  const [modalType, setModalType] = useState('');
   const [renameValue, setRenameValue] = useState('');
   const [renameIndex, setRenameIndex] = useState(null);
-  const [adminMode, setAdminMode] = useState(false); // adminMode 상태 추가
+  const [adminMode, setAdminMode] = useState(false);
+  const [faqMode, setFaqMode] = useState(false);
+  const [faqData, setFaqData] = useState([]); // FAQ 데이터를 위한 상태 추가
   const navigate = useNavigate();
+
+  const liveData = [
+    { keyword: '안녕', response: '안녕하세요!', date: new Date().toLocaleString() },
+    { keyword: '날씨', response: '오늘은 맑은 날씨입니다.', date: new Date().toLocaleString() },
+    { keyword: '학교', response: '저희 학교는 SKKU입니다.', date: new Date().toLocaleString() },
+    // 더미 데이터 추가
+  ];
 
   const handleSendMessage = (message) => {
     const newChats = [...chats];
-    newChats[currentChatIndex].messages.push({ text: message, sender: 'user', timestamp: new Date().toLocaleString() });
+    const timestamp = new Date().toLocaleString();
+    newChats[currentChatIndex].messages.push({ text: message, sender: 'user', timestamp });
+
+    const botResponse = generateBotResponse(message);
+    newChats[currentChatIndex].messages.push({ text: botResponse.text, sender: 'bot', timestamp, source: botResponse.source });
+
     setChats(newChats);
-    setTimeout(() => {
-      newChats[currentChatIndex].messages.push({ text: `Received: ${message}`, sender: 'bot', timestamp: new Date().toLocaleString() });
-      setChats([...newChats]);
-    }, 1000); // 1초 후에 봇의 응답 추가
+  };
+
+  const generateBotResponse = (message) => {
+    const data = faqMode ? faqData : liveData;
+    if (typeof message === 'string') {
+      const keywordMatch = data.find(data => message.includes(data.keyword));
+      if (keywordMatch) {
+        return { text: `${keywordMatch.response}\n출처: ${keywordMatch.source}`, source: keywordMatch.source, date: keywordMatch.date };
+      }
+    }
+    return { text: '죄송합니다, 이해할 수 없는 메시지입니다.' };
   };
 
   const handleAddChat = () => {
@@ -42,6 +64,7 @@ const MainPage = () => {
     newChats[currentChatIndex].mode = newChats[currentChatIndex].isToggleOn ? 'Live Mode' : 'FAQ Mode';
     newChats[currentChatIndex].modeClass = newChats[currentChatIndex].isToggleOn ? 'live' : 'faq';
     setChats(newChats);
+    setFaqMode(!newChats[currentChatIndex].isToggleOn);
   };
 
   const handleSelectChat = (index) => {
@@ -101,20 +124,25 @@ const MainPage = () => {
         onSignOut={handleSignOut}
         onRemoveChat={handleRemoveChat}
         onRenameChat={handleRenameChat}
-        onOptionClick={handleOptionClick} // 옵션 클릭 핸들러 추가
+        onOptionClick={handleOptionClick}
       />
       <div className="main-content">
-      <div className='profile-header'>
-        <div className="chat-header">
-          
-          <img src={profileImage} alt="Profile" className="profile-image" />
-          <span className="profile-name">Finger Princess</span>
-         
-
-        </div>
+        <div className='profile-header'>
+          <div className="chat-header">
+            <img src={profileImage} alt="Profile" className="profile-image" />
+            <span className="profile-name">Finger Princess</span>
+          </div>
         </div>
         {adminMode ? (
-          <AdminPage />
+          <AdminPage faqData={faqData} setFaqData={setFaqData} />
+        ) : faqMode ? (
+          <FaqWindow
+            messages={chats[currentChatIndex].messages} 
+            onSendMessage={handleSendMessage}
+            currentMode={chats[currentChatIndex].mode}
+            isToggleOn={chats[currentChatIndex].isToggleOn}
+            onModeToggle={handleModeToggle}
+          />
         ) : (
           currentChatIndex >= 0 && chats[currentChatIndex] ? (
             <ChatWindow 

@@ -1,13 +1,49 @@
-import React from 'react';
-import './AdminPage.css';
+import React, { useState } from 'react';
 
-const AdminPage = () => {
-    return (
-        <div className="admin-page">
-            <h1>Admin Page</h1>
-            <p>여기에 관리 페이지 내용을 추가하세여!!!!</p>
-        </div>
-    );
+const AdminPage = ({ faqData, setFaqData }) => {
+  const [keyword, setKeyword] = useState('');
+  const [response, setResponse] = useState('');
+  const [source, setSource] = useState('');
+
+  const handleAddFaq = () => {
+    const newFaq = { keyword, response, source, date: new Date().toLocaleString() };
+    setFaqData([...faqData, newFaq]);
+    setKeyword('');
+    setResponse('');
+    setSource('');
+  };
+
+  return (
+    <div>
+      <h1>Admin Page</h1>
+      <input
+        type="text"
+        placeholder="Keyword"
+        value={keyword}
+        onChange={(e) => setKeyword(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Response"
+        value={response}
+        onChange={(e) => setResponse(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Source"
+        value={source}
+        onChange={(e) => setSource(e.target.value)}
+      />
+      <button onClick={handleAddFaq}>Add FAQ</button>
+      <ul>
+        {faqData.map((faq, index) => (
+          <li key={index}>
+            <strong>{faq.keyword}</strong>: {faq.response} (출처: {faq.source}) - {faq.date}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 export default AdminPage;
