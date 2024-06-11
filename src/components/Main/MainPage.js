@@ -23,7 +23,7 @@ const MainPage = () => {
   const navigate = useNavigate();
 
   const liveData = [
-    { keyword: '안녕', response: '안녕하세요!', date: new Date().toLocaleString() },
+    { keyword: '안녕', response: '안녕하세요!',source: '재희', date: new Date().toLocaleString() },
     { keyword: '날씨', response: '오늘은 맑은 날씨입니다.', date: new Date().toLocaleString() },
     { keyword: '학교', response: '저희 학교는 SKKU입니다.', date: new Date().toLocaleString() },
     // 더미 데이터 추가
@@ -45,7 +45,7 @@ const MainPage = () => {
     if (typeof message === 'string') {
       const keywordMatch = data.find(data => message.includes(data.keyword));
       if (keywordMatch) {
-        return { text: `${keywordMatch.response}\n출처: ${keywordMatch.source}`, source: keywordMatch.source, date: keywordMatch.date };
+        return { text: `${keywordMatch.response}`, source: keywordMatch.source, date: keywordMatch.date };
       }
     }
     return { text: '죄송합니다, 이해할 수 없는 메시지입니다.' };
