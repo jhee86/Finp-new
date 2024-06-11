@@ -29,6 +29,7 @@
 }
   .message-date{
     font-size: 10px;
+    text-align: left;
   } 
   
   /* 출처 css */
@@ -44,12 +45,11 @@
 
   }
 
-  .under-massage{
-    display: flex;
-    gap: 10px;
+.under-message{
 
-  }
-  
+  display: flex;
+  gap: 10px;
+}
   
   .message-feedback {
     display: flex;
