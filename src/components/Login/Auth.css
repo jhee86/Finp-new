@@ -1,0 +1,111 @@
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #FFF; /* 배경색을 원하는 대로 변경 */
+        }
+
+        .auth-container {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border:2px solid #124f1d;
+            border-radius: 13px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .auth-form {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+            
+        }
+        
+
+        .auth-container h2 {
+            margin-bottom: 20px;
+            color: #1c6829;
+            font-size: 30px; 
+            opacity: 0.6;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            position: absolute;
+            top: 50%;
+            left: 50px;
+            transform: translateY(-50%);
+            color: #0b7d20;
+            font-size: 16px;
+            font-weight: bold;
+            pointer-events: none;
+        }
+
+        .input-group input {
+            width: 60%;
+            height: 30px;
+            padding: 8px 8px 8px 40px;
+            border: 2px solid #124f1d;
+            border-radius: 17px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 77%;
+            height: 50px;
+            padding: 10px;
+            font-size: 20px; 
+            background-color: #124f1d;
+            font-weight: bold;
+            color: white;
+            border: none;
+            border-radius: 17px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #124f1d;
+        }
+
+        .signup-link {
+            margin-top: 10px;
+            margin-left: 150px;
+            
+            
+        }
+
+        .signup-link a {
+            color: #808080;
+            font-size: 13px; 
+            text-decoration: underline;
+            
+            
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+
+        .logo-container{
+            margin-top: 10px;
+            margin-left: 250px;
+            margin-right: 0px;
+            margin-bottom: -10px;
+        }
+
+
+
+        .logo-container img{
+            width: 30px;
+            height: auto;
+            margin-bottom: 0px;          
+
+        }

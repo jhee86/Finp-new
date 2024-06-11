@@ -1,0 +1,51 @@
+.chat-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items:first baseline ;
+  padding: 10px;
+  border-bottom: 1px solid #466b51;
+}
+.sidebar-header{
+  display: flex;
+
+  justify-content: center;
+ gap: 10px;
+
+}
+.logo{
+  display: flex;
+  gap: 10px;
+}
+img{
+  width: 30px;
+  height: auto;
+  margin-bottom: 10px;  
+
+
+}
+.chat-name {
+  font-size: 14px;
+}
+
+.chat-mode {
+  font-size: 14px;
+}
+
+.chat-mode.live {
+  color: red;
+}
+
+.chat-mode.faq {
+  color: blue;
+}
+.button-align {
+  display: flex;
+
+  align-items: center;
+  width: 100%; /* Adjust width as needed */
+
+}
+
+
+

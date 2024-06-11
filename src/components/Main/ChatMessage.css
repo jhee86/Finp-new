@@ -1,0 +1,50 @@
+.chat-message {
+    display: flex;
+    align-items: flex-start;
+    margin: 10px 0;
+  }
+  
+  .message-profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 2px solid #ccc; /* 테두리 추가 */
+  }
+  
+  .message-content {
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 80%;
+    position: relative;
+  }
+  
+  .chat-message.user .message-content {
+    background-color: #ffffff;
+  }
+  
+  .chat-message.source .message-content {
+    background-color: #e0e0e0; /* 출처가 포함된 메시지의 배경색 */
+  }
+  
+  .message-feedback {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+  }
+  
+  .feedback-icon {
+    cursor: pointer;
+    margin-right: 5px;
+    color: #888;
+  }
+  
+  .feedback-icon:hover {
+    color: #555;
+  }
+  
+  .feedback-icon.active {
+    color: #2e5038;
+  }
+  
