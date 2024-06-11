@@ -25,7 +25,12 @@ const MainPage = () => {
   const liveData = [
     { keyword: '안녕', response: '안녕하세요!',source: '재희', date: new Date().toLocaleString() },
     { keyword: '날씨', response: '오늘은 맑은 날씨입니다.', date: new Date().toLocaleString() },
-    { keyword: '학교', response: '저희 학교는 SKKU입니다.', date: new Date().toLocaleString() },
+  
+    { 
+      keyword: '성균관대학교 자과캠에서 화상회의 가능한 곳이 어디 있을까?', 
+      response: '성균관대학교 자과캠에서 화상회의 가능한 장소로는 에스카라 라운지, 벤젠관의 책상이 많은 곳, 산학관 1층의 러닝팩토리, 디도 5층 등이 있습니다. 또한, 학번을 빌려서 스터디룸을 예약하는 방법도 있습니다. 이러한 장소들을 이용하여 줌미팅을 진행하시면 될 것 같습니다. 감사합니다.',
+      source: 'https://everytime.kr/370445/v/332868383'
+  },
     // 더미 데이터 추가
   ];
 
