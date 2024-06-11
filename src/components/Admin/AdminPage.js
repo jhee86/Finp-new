@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./AdminPage.css";
-import Modal from "../modal/Modal";
+import FaQModal from "../modal/FaQModal";
+import usePagination from "../../hooks/usePagination";
 
-const data = [
+const data_ = [
   {
     id: 2,
     question: "Lannister",
@@ -52,49 +53,47 @@ const data = [
     lastUpdate: "2024-06-09T10:39:22",
   },
 ];
-const d = [];
+
+const data = [];
 for (let i = 0; i < 10; i++) {
-  // concat data to d
-  d.push(...data);
+  // concat data to d with unique id for each item
+  data_.forEach((item, index) => {
+    data.push({
+      ...item,
+      id: `${i}-${item.id}`, // 고유한 id 생성
+    });
+  });
 }
 
 const AdminPage = ({ faqData, setFaqData }) => {
-  const [keyword, setKeyword] = useState("");
-  const [response, setResponse] = useState("");
-  const [source, setSource] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [items, setItems] = useState([]);
-  const itemsPerPage = 10;
+  console.log("faqdata: ", faqData);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { next, prev, jump, currentData, currentPage, maxPage } = usePagination(
+    faqData,
+    15
+  ); // data, itemsPerPage
 
-  // Concatenate data 10 times for testing
-  const concatenatedData = Array(10).fill(data).flat();
-
-  useEffect(() => {
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    setItems(concatenatedData.slice(indexOfFirstItem, indexOfLastItem));
-    console.log(items);
-  }, [currentPage]);
-
-  const totalPages = Math.ceil(concatenatedData.length / itemsPerPage);
-
-  const handlePageChange = (pageNumber) => {
-    if (pageNumber >= 1 && pageNumber <= totalPages) {
-      setCurrentPage(pageNumber);
-    }
+  const onClickAddFQ = () => {
+    setIsModalOpen(true);
   };
 
-  const handleAddFaq = () => {
+  const handleAddFaq = (data) => {
     const newFaq = {
-      keyword,
-      response,
-      source,
-      date: new Date().toLocaleString(),
+      id: data.id,
+      answer: data.answer,
+      question: data.question,
+      keyword: data.question,
+      response: data.answer,
+      create: new Date().toLocaleString(),
+      lastUpdate: new Date().toLocaleString(),
     };
+
     setFaqData([...faqData, newFaq]);
-    setKeyword("");
-    setResponse("");
-    setSource("");
+    setIsModalOpen(false);
+  };
+
+  const onClose = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -109,7 +108,7 @@ const AdminPage = ({ faqData, setFaqData }) => {
           <span id="t-delete">remove</span>
         </div>
         <div className="table-body">
-          {items.map((item) => (
+          {currentData().map((item) => (
             <div key={item.id} className="table-row">
               <div id="t-id">{item.id}</div>
               <div id="t-answer">{item.question}</div>
@@ -125,29 +124,29 @@ const AdminPage = ({ faqData, setFaqData }) => {
       </div>
 
       <div className="table-footer">
-        <button className="fq-add-button button-align">
+        <button className="fq-add-button button-align" onClick={onClickAddFQ}>
           <span className="material-symbols-outlined">add</span>
           <p>FQ 추가</p>
         </button>
+        <FaQModal
+          isOpen={isModalOpen}
+          onClose={onClose}
+          onConfirm={handleAddFaq}
+          data={{ id: "", question: "", answer: "" }}
+        />
         <div className="pagination">
           <span>«</span>
-          {Array.from({ length: totalPages }, (_, i) => (
+          {Array.from({ length: maxPage }, (_, i) => (
             <span
               key={i}
               className={`page-number ${
                 i + 1 === currentPage ? "current" : ""
               }`}
-              onClick={() => handlePageChange(i + 1)}
+              onClick={() => jump(i + 1)}
             >
               {i + 1}
             </span>
           ))}
-          {/* 
-          <span className="page-number">1</span>
-          <span className="page-number">2</span>
-          <span className="page-number">3</span>
-          <span className="page-number">4</span>
-          <span className="page-number">5</span> */}
           <span>»</span>
         </div>
       </div>
