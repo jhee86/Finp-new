@@ -1,9 +1,142 @@
-.admin-page {
-    padding: 20px;
-    background-color: white;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.content {
+  width: 100%;
+  overflow-x: auto;
+  background-color: white;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.admin-table {
+  width: 100%;
+  display: table;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  height: 80vh;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+}
+
+.admin-table .table-header,
+.admin-table .table-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.table-header span {
+  font-weight: bold;
+  border-right: 1px solid #9b9b9b;
+}
+
+.table-header span:last-child {
+  border-right: none;
+}
+
+#t-id {
+  flex: 0.5;
+}
+
+#t-answer {
+  flex: 2;
+}
+
+#t-question {
+  flex: 3;
+}
+
+#t-create {
+  flex: 1;
+}
+
+#t-update {
+  flex: 1;
+}
+
+#t-delete {
+  flex: 1;
+}
+
+.admin-table .table-header span,
+.admin-table .table-row div {
+  flex: 1;
+  text-align: center;
+  padding: 10px 0;
+  max-height: 30px;
+}
+
+.table-row div {
+  align-items: stretch;
+  flex: 1;
+  border-right: 1px dashed #b6b6b6;
+  white-space: nowrap; /* 텍스트를 한 줄로 유지 */
+  overflow: hidden; /* 내용이 넘칠 경우 숨김 */
+  text-overflow: ellipsis; /* 넘친 텍스트를 생략 부호로 표시 */
+}
+
+.table-row div:last-child {
+  border-right: none;
+}
+
+.delete-button {
+  font-size: 14px;
+  width: 16px;
+  height: 16px;
+
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.delete-button:hover {
+  color: red;
+}
+
+.table-footer {
+  display: flex;
+  justify-content: space-between; /* 좌우 가장자리에 자식 요소를 위치시킵니다. */
+  align-items: center;
+  padding: 10px 0;
+}
+
+.pagination {
+  text-align: center;
+}
+
+.pagination span {
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.page-number {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.page-number:hover {
+  background-color: #f2f2f2;
+}
+
+.fq-add-button {
+  background-color: #ffffff;
+  color: black;
+  border: 1px solid black;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+  width: 150px;
+  align-items: center;
+  justify-content: center;
+}
+
+.fq-add-button:hover {
+  background-color: #9b9b9b;
 }
