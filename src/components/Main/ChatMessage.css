@@ -1,0 +1,74 @@
+.chat-message {
+    display: flex;
+    align-items: flex-start;
+    margin: 10px 0;
+  }
+  
+  .message-profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 2px solid #ccc; /* 테두리 추가 */
+  }
+  
+  .message-content {
+
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 80%;
+    position: relative;
+  }
+  
+  .chat-message.user .message-content {
+    background-color: #ffffff;
+    
+  }
+.message-text{
+  text-align: left;
+}
+  .message-date{
+    font-size: 10px;
+    text-align: left;
+  } 
+  
+  /* 출처 css */
+  .message-source { 
+    font-style: italic;
+    font-size: 0.8rem;
+    background-color: #d6d6d6a1;
+    border-radius: 20px;
+    padding:10px;
+    width: 100%;
+    text-align: left;
+
+
+  }
+
+.under-message{
+
+  display: flex;
+  gap: 10px;
+}
+  
+  .message-feedback {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    font-size: 20px;
+  }
+  
+  .feedback-icon {
+    cursor: pointer;
+    margin-right: 5px;
+    color: #888;
+  }
+  
+  .feedback-icon:hover {
+    color: #555;
+  }
+  
+  .feedback-icon.active {
+    color: #2e5038;
+  }
+  

@@ -1,0 +1,11 @@
+.chat-message {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+  
+  .user .message-content {
+    text-align: left;
+  }
+  
+
