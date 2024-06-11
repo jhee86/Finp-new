@@ -32,10 +32,10 @@ Add Question
       </button>
 
       <button className="option button-align" onClick={onOptionClick}>
-  <span className="material-symbols-outlined">
-    settings
-  </span> <p>
-  Option
+      <span class="material-symbols-outlined">
+keyboard_option_key
+</span><p>
+   Option
     </p>
 </button>
 

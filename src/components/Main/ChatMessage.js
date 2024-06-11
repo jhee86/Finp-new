@@ -30,6 +30,7 @@ const ChatMessage = ({ message }) => {
         <img src={isUser ? userImage : botImage} alt="Profile" className="message-profile-image" />
         <div className="message-content">
           <p>{message.text}</p>
+          <p className="message-date">{message.timestamp}</p>
           {!isUser && (
             <div className="message-feedback">
               <FaThumbsUp
@@ -42,6 +43,7 @@ const ChatMessage = ({ message }) => {
               />
             </div>
           )}
+           
         </div>
       </div>
     );

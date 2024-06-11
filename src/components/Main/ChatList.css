@@ -41,7 +41,6 @@ img{
 }
 .button-align {
   display: flex;
-
   align-items: center;
   width: 100%; /* Adjust width as needed */
 
