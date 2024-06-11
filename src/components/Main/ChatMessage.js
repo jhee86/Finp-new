@@ -41,19 +41,19 @@ const ChatMessage = ({ message }) => {
                 <>
                   <p className="message-source"><strong>출처</strong><br/><a href={message.source} target="_blank" rel="noopener noreferrer">{message.source}</a></p>
                   <div className='under-message'>
-                    <p className="message-date">{message.timestamp}</p>
-                    <div className="message-feedback">
-                      <FaThumbsUp
-                        className={`feedback-icon ${liked ? 'active' : ''}`}
-                        onClick={handleLike}
-                      />
-                      <FaThumbsDown
-                        className={`feedback-icon ${disliked ? 'active' : ''}`}
-                        onClick={handleDislike}
-                      />
-                    </div>
-                  </div>
-                </>
+              <p className="message-date">{message.timestamp}</p>
+              <div className="message-feedback">
+                <FaThumbsUp
+                  className={`feedback-icon ${liked ? 'active' : ''}`}
+                  onClick={handleLike}
+                />
+                <FaThumbsDown
+                  className={`feedback-icon ${disliked ? 'active' : ''}`}
+                  onClick={handleDislike}
+                />
+              </div>
+              </div>
+</>
               )}
               {message.text === "죄송합니다, 이해할 수 없는 메시지입니다." && (
                 <p className="message-date">{message.timestamp}</p>
@@ -63,7 +63,6 @@ const ChatMessage = ({ message }) => {
         </div>
       </div>
     );
-    
     
 
   };
