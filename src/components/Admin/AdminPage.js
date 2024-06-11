@@ -92,6 +92,11 @@ const AdminPage = ({ faqData, setFaqData }) => {
     setIsModalOpen(false);
   };
 
+  const handleRemoveFaq = (id) => {
+    const newFaqData = faqData.filter((faq) => faq.id !== id);
+    setFaqData(newFaqData);
+  };
+
   const onClose = () => {
     setIsModalOpen(false);
   };
@@ -116,7 +121,12 @@ const AdminPage = ({ faqData, setFaqData }) => {
               <div id="t-create">{item.create}</div>
               <div id="t-update">{item.lastUpdate}</div>
               <div id="t-delete">
-                <button className="delete-button">🗑️</button>
+                <button
+                  className="delete-button"
+                  onClick={() => handleRemoveFaq(item.id)}
+                >
+                  🗑️
+                </button>
               </div>
             </div>
           ))}
