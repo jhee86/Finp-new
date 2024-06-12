@@ -3,74 +3,11 @@ import "./AdminPage.css";
 import FaQModal from "../modal/FaQModal";
 import usePagination from "../../hooks/usePagination";
 
-const data_ = [
-  {
-    id: 2,
-    question: "Lannister",
-    answer:
-      "ㅁㄴㄻㅇㄴㄹㄴㅇㄹㅇㄴㅁ ㄻㄴ ㅁㄴㄹ ㅁㄴㅇㄹ ㅁㄴㅇㄹ ㅁㄴㅇㄹ ㅁㄴㅇㄹ ㅇㄴㅁ ㄹㅇㅁㄴㄹ ㅁㄴㅇㄹ ㄴㅁㅇㄹ ",
-    create: "2024-06-09T10:39:22",
-    lastUpdate: "2024-06-09T10:39:22",
-  },
-  {
-    id: 3,
-    question: "Lannister",
-    answer:
-      "ㅁㄴㄻㅇㄴㄹㄴㅇㄹㅇㄴㅁ ㄻㄴ ㅁㄴㄹ ㅁㄴㅇㄹ ㅁㄴㅇㄹ ㅁㄴㅇㄹ ㅁㄴㅇㄹ ㅇㄴㅁ ㄹㅇㅁㄴㄹ ㅁㄴㅇㄹ ㄴㅁㅇㄹ ",
-    create: "2024-06-09T10:39:22",
-    lastUpdate: "2024-06-09T10:39:22",
-  },
-  {
-    id: 4,
-    question: "Lannister",
-    answer:
-      "ㅁㄴㄻㅇㄴㄹㄴㅇㄹㅇㄴㅁ ㄻㄴ ㅁㄴㄹ ㅁㄴㅇㄹ ㅁㄴㅇㄹ ㅁㄴㅇㄹ ㅁㄴㅇㄹ ㅇㄴㅁ ㄹㅇㅁㄴㄹ ㅁㄴㅇㄹ ㄴㅁㅇㄹ ",
-    create: "2024-06-09T10:39:22",
-    lastUpdate: "2024-06-09T10:39:22",
-  },
-  {
-    id: 5,
-    question: "Lannister",
-    answer:
-      "ㅁㄴㄻㅇㄴㄹㄴㅇㄹㅇㄴㅁ ㄻㄴ ㅁㄴㄹ ㅁㄴㅇㄹ ㅁㄴㅇㄹ ㅁㄴㅇㄹ ㅁㄴㅇㄹ ㅇㄴㅁ ㄹㅇㅁㄴㄹ ㅁㄴㅇㄹ ㄴㅁㅇㄹ ",
-    create: "2024-06-09T10:39:22",
-    lastUpdate: "2024-06-09T10:39:22",
-  },
-  {
-    id: 6,
-    question: "Lannister",
-    answer:
-      "ㅁㄴㄻㅇㄴㄹㄴㅇㄹㅇㄴㅁ ㄻㄴ ㅁㄴㄹ ㅁㄴㅇㄹ ㅁㄴㅇㄹ ㅁㄴㅇㄹ ㅁㄴㅇㄹ ㅇㄴㅁ ㄹㅇㅁㄴㄹ ㅁㄴㅇㄹ ㄴㅁㅇㄹ ",
-    create: "2024-06-09T10:39:22",
-    lastUpdate: "2024-06-09T10:39:22",
-  },
-  {
-    id: 7,
-    question: "Lannister",
-    answer:
-      "ㅁㄴㄻㅇㄴㄹㄴㅇㄹㅇㄴㅁ ㄻㄴ ㅁㄴㄹ ㅁㄴㅇㄹ ㅁㄴㅇㄹ ㅁㄴㅇㄹ ㅁㄴㅇㄹ ㅇㄴㅁ ㄹㅇㅁㄴㄹ ㅁㄴㅇㄹ ㄴㅁㅇㄹ ",
-    create: "2024-06-09T10:39:22",
-    lastUpdate: "2024-06-09T10:39:22",
-  },
-];
-
-const data = [];
-for (let i = 0; i < 10; i++) {
-  // concat data to d with unique id for each item
-  data_.forEach((item, index) => {
-    data.push({
-      ...item,
-      id: `${i}-${item.id}`, // 고유한 id 생성
-    });
-  });
-}
-
 const AdminPage = ({ faqData, setFaqData }) => {
-  console.log("faqdata: ", faqData);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { next, prev, jump, currentData, currentPage, maxPage } = usePagination(
     faqData,
-    15
+    10
   ); // data, itemsPerPage
 
   const onClickAddFQ = () => {
@@ -86,6 +23,8 @@ const AdminPage = ({ faqData, setFaqData }) => {
       response: data.answer,
       create: new Date().toLocaleString(),
       lastUpdate: new Date().toLocaleString(),
+      date: new Date().toLocaleString(),
+      text: data.answer,
     };
 
     setFaqData([...faqData, newFaq]);
@@ -93,7 +32,10 @@ const AdminPage = ({ faqData, setFaqData }) => {
   };
 
   const handleRemoveFaq = (id) => {
-    const newFaqData = faqData.filter((faq) => faq.id !== id);
+    const newFaqData = faqData.filter(
+      (faq) => faq.id.toString() !== id.toString()
+    );
+
     setFaqData(newFaqData);
   };
 
@@ -115,19 +57,19 @@ const AdminPage = ({ faqData, setFaqData }) => {
         <div className="table-body">
           {currentData().map((item) => (
             <div key={item.id} className="table-row">
-              <div id="t-id">{item.id}</div>
-              <div id="t-answer">{item.question}</div>
-              <div id="t-question">{item.answer}</div>
-              <div id="t-create">{item.create}</div>
-              <div id="t-update">{item.lastUpdate}</div>
-              <div id="t-delete">
+              <span id="t-id">{item.id}</span>
+              <span id="t-answer">{item.question}</span>
+              <span id="t-question">{item.answer}</span>
+              <span id="t-create">{item.create}</span>
+              <span id="t-update">{item.lastUpdate}</span>
+              <span id="t-delete">
                 <button
                   className="delete-button"
                   onClick={() => handleRemoveFaq(item.id)}
                 >
                   🗑️
                 </button>
-              </div>
+              </span>
             </div>
           ))}
         </div>

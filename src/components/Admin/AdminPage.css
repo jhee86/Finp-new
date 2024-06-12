@@ -10,6 +10,7 @@
 
 .admin-table {
   width: 100%;
+  overflow-x: auto;
   display: table;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
@@ -37,33 +38,39 @@
 
 #t-id {
   flex: 0.5;
+  max-width: 50px;
 }
 
 #t-answer {
   flex: 2;
+  max-width: 200px;
 }
 
 #t-question {
   flex: 3;
+  max-width: 300px;
 }
 
 #t-create {
   flex: 1;
+  max-width: 100px;
 }
 
 #t-update {
   flex: 1;
+  max-width: 100px;
 }
 
 #t-delete {
-  flex: 1;
+  flex: 0.5;
+  max-width: 50px;
 }
 
 .admin-table .table-header span,
-.admin-table .table-row div {
+.table-row div {
   flex: 1;
   text-align: center;
-  padding: 10px 0;
+  padding: 2px 0;
   max-height: 30px;
 }
 
