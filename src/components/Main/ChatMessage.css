@@ -13,7 +13,7 @@
   }
   
   .message-content {
-    background-color: #f1f1f1;
+
     padding: 10px;
     border-radius: 10px;
     max-width: 80%;
@@ -22,16 +22,40 @@
   
   .chat-message.user .message-content {
     background-color: #ffffff;
+    
   }
+.message-text{
+  text-align: left;
+}
+  .message-date{
+    font-size: 10px;
+    text-align: left;
+  } 
   
-  .chat-message.source .message-content {
-    background-color: #e0e0e0; /* 출처가 포함된 메시지의 배경색 */
+  /* 출처 css */
+  .message-source { 
+    font-style: italic;
+    font-size: 0.8rem;
+    background-color: #d6d6d6a1;
+    border-radius: 20px;
+    padding:10px;
+    width: 100%;
+    text-align: left;
+
+
   }
+
+.under-message{
+
+  display: flex;
+  gap: 10px;
+}
   
   .message-feedback {
     display: flex;
     align-items: center;
     margin-top: 5px;
+    font-size: 20px;
   }
   
   .feedback-icon {

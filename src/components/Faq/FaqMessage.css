@@ -5,17 +5,14 @@
   }
   
   .user .message-content {
-    background-color: #d4f1f4;
-    text-align: right;
+    text-align: left;
   }
   
-  .bot .message-content {
-    background-color: #f1f1f1;
-  }
-  
-  .message-source {
-    font-style: italic;
-    font-size: 0.8rem;
-    color: #666;
-  }
-  
+.chat-message.bot .faq-message-group {
+  border: 1px solid none;
+  background-color: #e4e4e48a;
+  border-radius: 20px;
+  padding: 15px;
+  margin-bottom: 10px;
+  text-align: left;
+}
