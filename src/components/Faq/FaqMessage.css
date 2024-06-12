@@ -8,4 +8,11 @@
     text-align: left;
   }
   
-
+.chat-message.bot .faq-message-group {
+  border: 1px solid none;
+  background-color: #e4e4e48a;
+  border-radius: 20px;
+  padding: 15px;
+  margin-bottom: 10px;
+  text-align: left;
+}
