@@ -13,7 +13,7 @@ const initData = [
 
 const usePagination = (data, itemsPerPage) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [maxPage, setMaxPage] = useState(Math.ceil(data.length / itemsPerPage));
+  const maxPage = Math.ceil(data.length / itemsPerPage);
 
   const currentData = () => {
     const begin = (currentPage - 1) * itemsPerPage;
