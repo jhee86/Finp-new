@@ -11,28 +11,36 @@ const FaqMessage = ({ message }) => {
     setIsOpen(!isOpen);
   };
 
+  const groupedMessages = [];
+  if (!isUser) {
+    // 봇의 메시지일 경우, 두 줄씩 묶기
+    const lines = message.text.split("\n");
+    for (let i = 1; i < lines.length; i += 2) {
+      groupedMessages.push(lines.slice(i, i + 2));
+    }
+  }
+
   return (
     <div className={`chat-message ${isUser ? 'user' : 'bot'}`}>
-        <img src={isUser ? userImage : botImage} alt="Profile" className="message-profile-image" />
+      <img src={isUser ? userImage : botImage} alt="Profile" className="message-profile-image" />
       <div className="message-content">
-        <p className='message-text'>{message.text}</p>
-
-        {!isUser && message.response && (
-          <div className="faq-item">
-            <div className="faq-header" onClick={handleToggle}>
-              <strong>{message.response}</strong>
-              <span className={`faq-toggle ${isOpen ? 'open' : ''}`}>▼</span>
+        {!isUser && <div className="intro-message">{message.text.split("\n")[0]}</div>}
+        {isUser ? (
+          message.text.split("\n").map((line, index) => (
+            <div key={index} className="faq-message-item">
+              {line}
             </div>
-            {isOpen && (
-              <div className="faq-details">
-                <p>{message.details}</p>
-                <br/>
-                <p className="message-source">
-                  출처: <a href={message.source} target="_blank" rel="noopener noreferrer">{message.source}</a>
-                </p>
-              </div>
-            )}
-          </div>
+          ))
+        ) : (
+          groupedMessages.map((group, groupIndex) => (
+            <div key={groupIndex} className="faq-message-group">
+              {group.map((line, index) => (
+                <div key={index} className="faq-message-item">
+                  {line}
+                </div>
+              ))}
+            </div>
+          ))
         )}
         <p className="message-date">{message.timestamp}</p>
       </div>

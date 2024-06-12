@@ -81,10 +81,10 @@ const MainPage = () => {
           data.keyword.includes(message)
         );
         if (keywordMatches.length > 0) {
-          const responseText = `'${message}'에 대해 알려드리겠습니다.\n\n` + keywordMatches
+          const responseText = `'${message}'에 대해 알려드리겠습니다.\n` + keywordMatches
             .map(
               (item, index) =>
-                `${index + 1}. ${item.question}\n답변: ${item.answer}\n`
+                `${index + 1}.  ${item.question}\n A: ${item.answer}`
             )
             .join("\n");
           return {
