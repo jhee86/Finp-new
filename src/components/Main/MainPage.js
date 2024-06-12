@@ -47,6 +47,7 @@ const MainPage = () => {
       response:
         "성균관대학교 자과캠에서 화상회의 가능한 장소로는 에스카라 라운지, 벤젠관의 책상이 많은 곳, 산학관 1층의 러닝팩토리, 디도 5층 등이 있습니다. 또한, 학번을 빌려서 스터디룸을 예약하는 방법도 있습니다. 이러한 장소들을 이용하여 줌미팅을 진행하시면 될 것 같습니다. 감사합니다.",
       source: "https://everytime.kr/370445/v/332868383",
+      date: new Date().toLocaleString(),
     },
     // 더미 데이터 추가
   ];
@@ -75,13 +76,32 @@ const MainPage = () => {
     const data = faqMode ? faqData : liveData;
 
     if (typeof message === "string") {
-      const keywordMatch = data.find((data) => message.includes(data.keyword));
-      if (keywordMatch) {
-        return {
-          text: `${keywordMatch.response}`,
-          source: keywordMatch.source,
-          date: keywordMatch.date,
-        };
+      if (faqMode) {
+        const keywordMatches = data.filter((data) =>
+          data.keyword.includes(message)
+        );
+        if (keywordMatches.length > 0) {
+          const responseText = `'${message}'에 대해 알려드리겠습니다.\n\n` + keywordMatches
+            .map(
+              (item, index) =>
+                `${index + 1}. ${item.question}\n답변: ${item.answer}\n`
+            )
+            .join("\n");
+          return {
+            text: responseText,
+            source: keywordMatches.map((item) => item.source).join(", "),
+            date: new Date().toLocaleString(),
+          };
+        }
+      } else {
+        const keywordMatch = data.find((data) => message.includes(data.keyword));
+        if (keywordMatch) {
+          return {
+            text: `${keywordMatch.response}`,
+            source: keywordMatch.source,
+            date: keywordMatch.date,
+          };
+        }
       }
     }
     return { text: "죄송합니다, 이해할 수 없는 메시지입니다." };

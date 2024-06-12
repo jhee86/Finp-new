@@ -38,7 +38,7 @@ const FaqWindow = ({ messages, onSendMessage, currentMode, isToggleOn, onModeTog
           onKeyPress={handleKeyPress}
         />
         <button className="send-button" onClick={handleSend}>
-          <span class="material-symbols-outlined">
+          <span className="material-symbols-outlined">
             send
           </span>
         </button>
